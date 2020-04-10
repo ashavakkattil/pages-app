@@ -13,12 +13,12 @@
             option-value='value'
             outlined
             dense
-            label='Choose Template'
+            label='Choose Page Type'
             v-model='page.page_type'
           ></q-select>
           <q-input label='Add title to the page' outlined dense v-model='page.page_title' class='q-my-md'></q-input>
           <q-input label='Page Url' outlined dense v-model='page.page_url' class='q-my-md'></q-input>
-          <q-editor label='Type...' v-model='page.page_description'></q-editor></div>
+          <q-editor placeholder='Type...' v-model='page.page_description'></q-editor></div>
         </q-card-section>
         <q-card-actions align='center'>
           <q-btn outline class='q-ma-sm' color='primary' @click='addPage'>Add Page</q-btn>

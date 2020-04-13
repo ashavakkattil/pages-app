@@ -1,48 +1,41 @@
 <template>
-  <q-item
-    clickable
-    tag="a"
-    target="_blank"
-    :href="link"
-  >
-    <q-item-section
-      v-if="icon"
-      avatar
-    >
-      <q-icon :name="icon" />
-    </q-item-section>
-
-    <q-item-section>
-      <q-item-label>{{ title }}</q-item-label>
-      <q-item-label caption>
-        {{ caption }}
-      </q-item-label>
-    </q-item-section>
-  </q-item>
+  <div>
+    <div >
+      <q-item v-for='page in pages' :key='page._id' @click='openPage(page._id)' clickable>
+        <q-item-section avatar v-if='page.published'>
+          <q-icon name='mdi-library-books' />
+        </q-item-section>
+        <q-item-section v-if='page.published'>
+          <q-item-label class='text-capitalize'>{{ page.page_title }}</q-item-label>
+        </q-item-section>
+      </q-item>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'EssentialLink',
-  props: {
-    title: {
-      type: String,
-      required: true
+  data () {
+    return {
+      pages: '',
+      pageurl: ''
+    }
+  },
+  mounted () {
+    this.getPages()
+  },
+  methods: {
+    async getPages () {
+      const response = await this.$axios.get('/').catch(error => {
+        console.log('Error', error)
+      })
+      if (response) {
+        this.pages = response.data.data
+      }
     },
-
-    caption: {
-      type: String,
-      default: ''
-    },
-
-    link: {
-      type: String,
-      default: '#'
-    },
-
-    icon: {
-      type: String,
-      default: ''
+    openPage (pageId) {
+      this.$router.push('pages/' + pageId)
     }
   }
 }

@@ -9,13 +9,12 @@ const app = express()
 
 /* middleware  Start*/
 app.use(bodyParser.json())
-  
 app.use(cors());
-/* middleware  Start*/
+/* middleware  End*/
 
 /* Router  Start*/
 app.use('/', pages)
-/* Router  Start*/
+/* Router  End*/
 
 /* DB connection  Start*/
 mongoose.connect('mongodb://localhost:27017/pagesDB', {
@@ -29,7 +28,7 @@ db.on('error', () => {
 db.once('open', () => {
     console.log('Successfully connected to the database')
 })
-/* DB connection  Start*/
+/* DB connection  End*/
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {

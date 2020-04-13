@@ -1,5 +1,5 @@
 <template>
-  <q-page centered>
+  <q-page centered v-if="page">
   <div class="q-ma-xl">
   <h5 class="text-capitalize">{{page.page_title}}</h5>
   <div v-html="page.page_description"></div>
@@ -15,17 +15,16 @@ export default {
     }
   },
   mounted () {
-    this.pageId = this.$route.params.id
-    this.getPage(this.pageId)
+    this.pageUrl = this.$route.params.page_url
+    this.getPage(this.pageUrl)
   },
   methods: {
-    async getPage (pageId) {
-      const response = await this.$axios.get('/' + pageId).catch(error => {
+    async getPage (pageUrl) {
+      const response = await this.$axios.get('/' + pageUrl).catch(error => {
         console.log('error', error)
       })
       if (response) {
         this.page = response.data.data
-        console.log(this.page)
         this.$q.notify({
           message: response.data.message,
           color: 'primary'

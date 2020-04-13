@@ -19,9 +19,8 @@ const router = express.Router()
     })
  })
 
- router.get('/:id', (req,res) => {
-     console.log(req.params.id)
-    Page.findById(req.params.id, function(error,page){
+ router.get('/:page_url', (req,res) => {
+    Page.find({'page_url': { '$regex': req.params.page_url, '$options': 'i' }}, function(error,page){
         if(error){
             res.status(500).json({
                 message: error.message
@@ -29,7 +28,7 @@ const router = express.Router()
         }
         else{
             res.json({
-                data: page,
+                data: page[0],
                 message: 'Page fetched successfully'
             })
         }

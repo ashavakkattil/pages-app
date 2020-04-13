@@ -25,7 +25,7 @@
               class='q-my-md'
             ></q-input>
             <q-input label='Page Url' outlined dense v-model='page.page_url' class='q-my-md'></q-input>
-            <q-editor placeholder='Type...' v-model='page_description'></q-editor>
+            <q-editor placeholder='Type...' v-model='page_description' :toolbar='toolbar'></q-editor>
           </div>
         </q-card-section>
         <q-card-actions align='center'>
@@ -53,7 +53,17 @@ export default {
         page_description: '',
         page_url: '',
         published: false
-      }
+      },
+      toolbar: [
+        ['bold', 'italic', 'strike', 'underline', 'subscript', 'superscript'],
+        ['token', 'hr', 'link', 'custom_btn'],
+        ['print', 'fullscreen'],
+        ['removeFormat'],
+        ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
+
+        ['undo', 'redo'],
+        ['viewsource']
+      ]
     }
   },
   methods: {

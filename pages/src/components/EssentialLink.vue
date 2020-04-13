@@ -1,7 +1,7 @@
 <template>
   <div>
     <div >
-      <q-item v-for='page in pages' :key='page._id' @click='openPage(page._id)' clickable>
+      <q-item v-for='page in pages' :key='page._id' @click='openPage(page.page_url)' clickable>
         <q-item-section avatar v-if='page.published'>
           <q-icon name='mdi-library-books' />
         </q-item-section>
@@ -18,8 +18,7 @@ export default {
   name: 'EssentialLink',
   data () {
     return {
-      pages: '',
-      pageurl: ''
+      pages: ''
     }
   },
   mounted () {
@@ -34,8 +33,8 @@ export default {
         this.pages = response.data.data
       }
     },
-    openPage (pageId) {
-      this.$router.push('pages/' + pageId)
+    openPage (pageUrl) {
+      this.$router.push('pages/' + pageUrl)
     }
   }
 }

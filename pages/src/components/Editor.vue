@@ -26,6 +26,7 @@
           ></q-input>
           <q-input label='Page Url' outlined dense v-model='page.page_url' class='q-my-md'></q-input>
           <q-editor
+            v-if="page.page_type.value === 'about' || page.page_type.value === 'terms'"
             placeholder='Type...'
             v-model='page.page_description'
             :dense='$q.screen.lt.md'
@@ -131,7 +132,8 @@ export default {
     return {
       option: [
         { value: 'about', name: 'About Us' },
-        { value: 'terms', name: 'Terms & Conditions' }
+        { value: 'terms', name: 'Terms & Conditions' },
+        { value: 'contact', name: 'Contact Us' }
       ],
       page_description: '',
       page: {
